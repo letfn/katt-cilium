@@ -3,3 +3,5 @@ hubble:
     enabled: true
   relay:
     enabled: true
+operator:
+  replicas: 1
