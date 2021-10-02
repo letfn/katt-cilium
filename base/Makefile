@@ -6,7 +6,7 @@ cilium.yaml: clean/cilium.yaml
 clean/cilium.yaml: values.yaml
 	-helm repo add cilium https://helm.cilium.io/
 	helm repo update
-	helm template cilium cilium/cilium --version 1.11.0-rc0 --namespace=cilium --values=values.yaml > $@
+	helm template cilium cilium/cilium --version 1.10.4 --namespace=kube-system --values=values.yaml > $@
 
 diff: cilium.yaml clean/cilium.yaml
 	kustomize build . > diff.yaml
