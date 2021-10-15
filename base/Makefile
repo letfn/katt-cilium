@@ -1,12 +1,15 @@
-build: clean cilium.yaml
+build: clean cilium.yaml ../cilium.yaml
+
+../cilium.yaml:
+	kustomize build . >$@
 
 cilium.yaml: clean/cilium.yaml
-	kustomize build clean > cilium.yaml
+	kustomize build clean >$@
 
 clean/cilium.yaml: values.yaml
 	-helm repo add cilium https://helm.cilium.io/
 	helm repo update
-	helm template cilium cilium/cilium --version 1.10.4 --namespace=kube-system --values=values.yaml > $@
+	helm template cilium cilium/cilium --version 1.10.5 --namespace=kube-system --values=values.yaml >$@
 
 diff: cilium.yaml clean/cilium.yaml
 	kustomize build . > diff.yaml
@@ -15,4 +18,4 @@ diff: cilium.yaml clean/cilium.yaml
 
 .PHONY: clean
 clean:
-	rm -f clean/cilium.yaml
+	rm -f clean/cilium.yaml cilium.yaml ../cilium.yaml
