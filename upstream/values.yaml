@@ -1,7 +1,11 @@
 hubble:
-  ui: 
+  ui:
     enabled: true
   relay:
     enabled: true
 operator:
   replicas: 1
+hostServices:
+  enabled: false
+bpf:
+  masquerade: false
